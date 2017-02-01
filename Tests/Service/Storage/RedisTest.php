@@ -81,9 +81,9 @@ class RedisTest extends TestCase
 
     public function testresetRate()
     {
-        $client = $this->getMock('Predis\\Client', array('hdel'));
+        $client = $this->getMock('Predis\\Client', array('del'));
         $client->expects($this->once())
-              ->method('hdel')
+              ->method('del')
               ->with('foo');
 
         $storage = new Redis($client);

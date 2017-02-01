@@ -56,7 +56,7 @@ class Redis implements StorageInterface
 
     public function resetRate($key)
     {
-        $this->client->hdel($key);
+        $this->client->del($key);
         return true;
     }
 }
