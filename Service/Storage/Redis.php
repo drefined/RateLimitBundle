@@ -23,7 +23,9 @@ class Redis implements StorageInterface
 
         $info = $this->client->hgetall($key);
 
-        if (!empty($info)) {
+        $requiredKeys = ['limit', 'calls', 'reset'];
+
+        if (count(array_diff($requiredKeys, array_keys($info))) === 0) {
             $rateLimitInfo = new RateLimitInfo();
             $rateLimitInfo->setLimit($info['limit']);
             $rateLimitInfo->setCalls($info['calls']);
