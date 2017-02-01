@@ -19,12 +19,16 @@ class Redis implements StorageInterface
 
     public function getRateInfo($key)
     {
+        $rateLimitInfo = null;
+
         $info = $this->client->hgetall($key);
 
-        $rateLimitInfo = new RateLimitInfo();
-        $rateLimitInfo->setLimit($info['limit']);
-        $rateLimitInfo->setCalls($info['calls']);
-        $rateLimitInfo->setResetTimestamp($info['reset']);
+        if (!empty($info)) {
+            $rateLimitInfo = new RateLimitInfo();
+            $rateLimitInfo->setLimit($info['limit']);
+            $rateLimitInfo->setCalls($info['calls']);
+            $rateLimitInfo->setResetTimestamp($info['reset']);
+        }
 
         return $rateLimitInfo;
     }
