@@ -1,3 +1,5 @@
 clover.xml
 html/
 vendor/*
+.idea/
+.DS_Store
